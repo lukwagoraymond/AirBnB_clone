@@ -55,8 +55,8 @@ class FileStorage:
         filename = FileStorage.__file_path
         if not os.path.isfile(filename):
             return
-        with open(filename, mode='r', encoding='utf-8') as rf:
-            FileStorage.__objects = json.load(rf, object_hook=models_encod_hook)
+        with open(filename, mode='r', encoding='utf-8') as f:
+            FileStorage.__objects = json.load(f, object_hook=models_encod_hook)
 
     def classes(self):
         """Returns a dictionary of valid classes and their references"""
