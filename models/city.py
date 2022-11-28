@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-''' The city class '''
+"""This module is for City Class"""
 
 from models.base_model import BaseModel
 
 
 class City(BaseModel):
-    ''' Tnis Represent City class. has attrs- state_id and name '''
-    stste_id = ""
+    """Class for managing Class objects"""
+    state_id = ""
     name = ""

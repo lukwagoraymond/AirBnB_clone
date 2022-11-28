@@ -5,6 +5,7 @@ of the command interpreter
 import models
 from models import storage
 import cmd
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -136,6 +137,54 @@ class HBNBCommand(cmd.Cmd):
                 instance_list = [str(obj) for key, obj in storage.all().items()
                                  if type(obj).__name__ == wrds[0]]
                 print(instance_list)
+
+    def do_update(self, line):
+        """Updates an instance based on the class name and id
+        by adding or updating attribute(save the change into
+        the JSON file"""
+        if len(line) == 0:
+            print("** class name missing **")
+            return
+
+        pattern = re.compile(r'(\S+)')
+        wrds = re.findall(pattern, line)
+        classname = wrds[0]
+        uid = wrds[1]
+        attribute = wrds[2]
+        value = wrds[3]
+        if len(wrds) == 0:
+            print("** class name missing **")
+        elif classname not in storage.classes():
+            print("** class doesn't exist **")
+        elif uid is None:
+            print("** instance id missing **")
+        else:
+            key = "{}.{}".format(classname, uid)
+            if key not in storage.all():
+                print("** no instance found **")
+            elif not attribute:
+                print("** attribute name missing **")
+            elif not value:
+                print("** value missing **")
+            else:
+                datatype = None
+                if not re.search('^".*"$', value):
+                    if '.' in value:
+                        datatype = float
+                    else:
+                        datatype = int
+                else:
+                    value = value.replace('"', '')
+                attributes = storage.attributes()[classname]
+                if attribute in attributes:
+                    value = attributes[attribute](value)
+                elif datatype:
+                    try:
+                        value = datatype(value)
+                    except ValueError:
+                        pass
+                setattr(storage.all()[key], attribute, value)
+                storage.all()[key].save()
 
 
 if __name__ == '__main__':

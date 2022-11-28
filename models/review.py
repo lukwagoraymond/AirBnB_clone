@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""Defines the Review class."""
+"""Module defines the Review class."""
 from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    ''' Class Review accepts place_id, user_id and tezt attribute. '''
+    """Class for managing review objects"""
 
     place_id = ""
     user_id = ""

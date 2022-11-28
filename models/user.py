@@ -1,11 +1,10 @@
 #!/usr/bin/python3
-''' The User class'''
-
+"""This module creates a User Class"""
 from models.base_model import BaseModel
 
 
 class User(BaseModel):
-    ''' contains public attributes of email, passwors, fname and lname'''
+    """Class to store User information"""
     email = ""
     password = ""
     first_name = ""

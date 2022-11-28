@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-''' The Place class '''
+"""Module for Place Class"""
 from models.base_model import BaseModel
 
 
 class Place(BaseModel):
-    '''This repeesents the Place class.
-    Has so many atrribute that defines a plcae '''
+    """Class for managing the place objects"""
 
-    cit_id = ""
+    city_id = ""
     user_id = ""
     name = ""
     description = ""
